@@ -38,6 +38,7 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
             if (text === 'Day' || text === 'Afternoon' || text === 'Night' ) {
+                sendTextMessage(sender, "Here is your customized plan: ")
                 sendGenericMessage(sender)
                 continue
             }
