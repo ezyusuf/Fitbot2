@@ -91,7 +91,7 @@ function sendGenericMessage(sender) {
                         "title": "More Info"
                     }, {
                         "type": "postback",
-                        "title": "Pumpup",
+                        "title": "Postback",
                         "Motivation": "Slow progress is better than no progress",
                     }],
                 }, {
