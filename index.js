@@ -38,7 +38,7 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
             if (text === 'Day' || text === 'Afternoon' || text === 'Night' || text === 'Hulktime' ) {
-                sendTextMessage(sender, "Below is your customized plan for the first day. Just Type 'Hulktime' to see it again: ")
+                sendTextMessage(sender, "Below is your customized plan for the first day. Just Type Hulktime to see it again: ")
                 sendGenericMessage(sender)
                 continue
             }
