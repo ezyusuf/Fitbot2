@@ -37,7 +37,7 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
         if (event.message && event.message.text) {
             text = event.message.text
-            if (text === 'Generic') {
+            if (text === 'Workout') {
                 sendGenericMessage(sender)
                 continue
             }
@@ -81,13 +81,13 @@ function sendGenericMessage(sender) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "First card",
-                    "subtitle": "Element #1 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+                    "title": "Bicep Curls (3 sets)",
+                    "subtitle": "Category:Arms",
+                    "image_url": "https://wger.de/media/exercise-images/74/Bicep-curls-1.png",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.messenger.com",
-                        "title": "web url"
+                        "url": "https://wger.de/en/exercise/74/view/biceps-curls-with-barbell",
+                        "title": "More Info"
                     }, {
                         "type": "postback",
                         "title": "Postback",
