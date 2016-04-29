@@ -91,8 +91,8 @@ function sendGenericMessage(sender) {
                         "title": "More Info"
                     }, {
                         "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for first element in a generic bubble",
+                        "title": "Pumpup",
+                        "Motivation": "Slow progress is better than no progress",
                     }],
                 }, {
                     "title": "Bench Press (3 sets)",
