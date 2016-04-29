@@ -37,8 +37,8 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
         if (event.message && event.message.text) {
             text = event.message.text
-            if (text === 'Day' || text === 'Afternoon' || text === 'Night' || text === 'Hulktime') {
-                sendTextMessage(sender, "Below is your customized plan for the first day: ")
+            if (text === 'Day' || text === 'Afternoon' || text === 'Night' || text === 'Hulktime' ) {
+                sendTextMessage(sender, "Below is your customized plan for the first day. Just Type 'Hulktime' to see it again: ")
                 sendGenericMessage(sender)
                 continue
             }
@@ -91,21 +91,17 @@ function sendGenericMessage(sender) {
                         "title": "More Info"
                     }, {
                         "type": "postback",
-                        "title": "PumpUp",
-                        "Persistance": "You only fail when you stop trying",
+                        "title": "Postback",
+                        "payload": "Payload for first element in a generic bubble",
                     }],
                 }, {
                     "title": "Bench Press (3 sets)",
                     "subtitle": "Category:Chest",
                     "image_url": "https://wger.de/media/exercise-images/192/Bench-press-2.png",
                     "buttons": [{
-                      "type": "web_url",
-                        "url": "https://wger.de/en/exercise/192/view/bench-press",
-                        "title": "More Info"
-                    }, {
                         "type": "postback",
-                        "title": "PumpUp",
-                        "Motivation": "Slow progress is better than no progress",
+                        "title": "Postback",
+                        "payload": "Payload for second element in a generic bubble",
                     }],
                 }]
             }
