@@ -2,6 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
+var authentications = require('./authentication')
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -52,8 +53,7 @@ app.post('/webhook/', function (req, res) {
     }
     res.sendStatus(200)
 })
-
-var token = "EAAW33vXhX8IBANYsNZAXH1eIDd8Q6apgDQQi6TOtXSQjppZCBAvpi6GQ6u0hiRovnOgVhSQdyGqFpVigoFMeCOq7M1vCDCQx5LdjxdjSrbQsB5SOckZBE4VYGd7BZCDSlirEXVPESjxZAeMlUgshHZBFGVT7lbJBBYAbV8GILEBAZDZD"
+var token = authentication.facebook.token;
 function sendTextMessage(sender, text) {
     messageData = {
         text:text
