@@ -2,7 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
-var authentications = require('./authentication')
+var authentication = require('./authentication')
 
 app.set('port', (process.env.PORT || 5000))
 
