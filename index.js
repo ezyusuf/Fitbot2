@@ -53,7 +53,7 @@ app.post('/webhook/', function (req, res) {
     }
     res.sendStatus(200)
 })
-var token = authentication.facebook.token;
+var token = "EAAW33vXhX8IBAHh1Geo5LSBguQ4PFCeVJnwSpcBszJ3V4sl4J2fR07RZCB6ZB6CPAcEajYfTZAtHoNoDVbTZCIzCcjfROl5wO7LPltaEXPlgPGdh1SZCHILDiC8UWTiZCpZANc0YdFtZCsuvyKclo7fp27iLSfrZCuZCpxwnfSKDK1HAZDZD";
 function sendTextMessage(sender, text) {
     messageData = {
         text:text
