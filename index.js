@@ -96,6 +96,10 @@ app.post('/webhook/', function (req, res) {
 
 app.get('/addgym', function(req, res) {
     console.log(req);
+    userRef.push({
+      name: 'allen12354111',
+      gyms: req.body
+    });
 })
 
 var token = "EAAPMCMAAi7gBAL7mhn4ZAIfBxVSJ4YOGPf9iUGYE9HnyZAyOuRXMPKStIOpoRVxtse7YlS4pqhONAZCcdL9Xz59vyYR68L5T6LcTZBkFEkFUHZBi9G5e6YDhSZBzDScZAY6ZBjvd7ngA4y1JVWKDuuW2O0NCZBbRoTE8jtwsmsOv7owZDZD";
