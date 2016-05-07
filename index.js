@@ -78,7 +78,7 @@ app.post('/webhook/', function (req, res) {
                 lastText = 'time';
                 continue
             }
-            if ((text.toLowerCase() === 'yes' || text.toLowerCase() === 'no') && lastText === 'time') {
+            if (text.toLowerCase() === 'yes' && lastText === 'time') {
                 sendTextMessage(sender, "Enter a query");
                 lastText = 'promptQuery'
                 continue;
