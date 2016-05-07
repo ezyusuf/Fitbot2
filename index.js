@@ -52,7 +52,7 @@ app.listen(app.get('port'), function() {
         var results = JSON.parse(body).results;
         console.log(results);
         results.forEach(function(result) {
-            console.log(result.formatted_address);
+            console.log(result.id);
         })
     });
 
@@ -93,6 +93,11 @@ app.post('/webhook/', function (req, res) {
     }
     res.sendStatus(200)
 })
+
+app.get('/addgym', function(req, res) {
+    console.log(req);
+})
+
 var token = "EAAPMCMAAi7gBAL7mhn4ZAIfBxVSJ4YOGPf9iUGYE9HnyZAyOuRXMPKStIOpoRVxtse7YlS4pqhONAZCcdL9Xz59vyYR68L5T6LcTZBkFEkFUHZBi9G5e6YDhSZBzDScZAY6ZBjvd7ngA4y1JVWKDuuW2O0NCZBbRoTE8jtwsmsOv7owZDZD";
 function sendTextMessage(sender, text) {
     messageData = {
@@ -140,8 +145,8 @@ function showGymCards(query) {
                 "image_url": "http://www.foreverfitness24.com/wp-content/uploads/2014/08/gym.jpg",
                 "buttons": [{
                     "type": "web_url",
-                    "url": "https://wger.de/en/exercise/74/view/biceps-curls-with-barbell",
-                    "title": "More Info"
+                    "url": "https://evening-dawn-97051.herokuapp.com/addgym?id=" + result.id,
+                    "title": "Add this Gym"
                 }, {
                     "type": "postback",
                     "title": "Postback",
