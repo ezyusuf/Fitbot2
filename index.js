@@ -9,6 +9,8 @@ var gkey = 'AIzaSyCiIsMceUzSB3RaR-6BhT8lW5F_NPf_UhY';
 var firebaseRef = new Firebase('https://fit-bot.firebaseio.com/')
 var userRef = new Firebase('https://fit-bot.firebaseio.com/users')
 
+var numGymCards = 3;
+
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -129,7 +131,8 @@ function showGymCards(query) {
 
         var results = JSON.parse(body).results;
         var elementArray = [];
-        results.forEach(function(result) {
+        for (var i = 0; i < Math.min(results.length, numGymCards); i++) {
+            var result = results[i];
             console.log(result.formatted_address);
             var element = {
                 "title": result.formatted_address,
@@ -146,8 +149,7 @@ function showGymCards(query) {
                 }],
             }
             elementArray.push(element);
-        })
-
+        }
         messageData = {
             "attachment": {
                 "type": "template",
