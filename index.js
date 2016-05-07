@@ -68,8 +68,10 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
             if (lastText === 'promptQuery') {
-                showGymCards(text);
-                lastText = 'queryResults';
+                showGymCards(text, function() {
+                    sendTextMessage(sender, "Would you like to set your home location? (Yes/No)");
+                });
+                lastText = 'setHomePrompt';
                 continue;
             }
             if (lastText === 'homeQuery') {
@@ -77,15 +79,11 @@ app.post('/webhook/', function (req, res) {
                 lastText = 'homeResults';
                 continue;
             }
-            if (lastText === 'queryResults') {
-                sendTextMessage(sender, "Would you like to set your home location? (Yes/No)")
-                lastText = 'setHomePrompt';
-                continue;
-            }
             if (text === 'Day' || text === 'Afternoon' || text === 'Night' || text === 'Hulktime' ) {
                 sendTextMessage(sender, "Below is your customized plan for the first day. Just Type 'Hulktime' to see it again: ")
-                sendGenericMessage(sender)
-                sendTextMessage(sender, "Would you like me to show you a list of gyms? (Yes/No)")
+                sendGenericMessage(sender, function() {
+                    sendTextMessage(sender, "Would you like me to show you a list of gyms? (Yes/No)");
+                });
                 lastText = 'time';
                 continue
             }
@@ -151,7 +149,7 @@ function queryPlaces(query, callback) {
     }, callback);
 }
 
-function showGymCards(query) {
+function showGymCards(query, callback) {
     queryPlaces(query, function(error, response, body) {
 
         var results = JSON.parse(body).results;
@@ -192,18 +190,12 @@ function showGymCards(query) {
                 recipient: {id:sender},
                 message: messageData,
             }
-        }, function(error, response, body) {
-            if (error) {
-                console.log('Error sending messages: ', error)
-            } else if (response.body.error) {
-                console.log('Error: ', response.body.error)
-            }
-        })
+        }, callback)
 
     });
 }
 
-function showHomeCards(query) {
+function showHomeCards(query, callback) {
     queryPlaces(query, function(error, response, body) {
 
         var results = JSON.parse(body).results;
@@ -240,18 +232,12 @@ function showHomeCards(query) {
                 recipient: {id:sender},
                 message: messageData,
             }
-        }, function(error, response, body) {
-            if (error) {
-                console.log('Error sending messages: ', error)
-            } else if (response.body.error) {
-                console.log('Error: ', response.body.error)
-            }
-        })
+        }, callback)
 
     });
 }
 
-function sendGenericMessage(sender) {
+function sendGenericMessage(sender, callback) {
     messageData = {
         "attachment": {
             "type": "template",
@@ -291,11 +277,5 @@ function sendGenericMessage(sender) {
             recipient: {id:sender},
             message: messageData,
         }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+    }, callback)
 }
