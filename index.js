@@ -145,6 +145,7 @@ function showGymCards(query) {
                     "payload": "Payload for first element in a generic bubble",
                 }],
             }
+            elementArray.push(element);
         })
 
         messageData = {
