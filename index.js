@@ -137,7 +137,7 @@ function showGymCards(query) {
             var element = {
                 "title": result.formatted_address,
                 "subtitle": "Category:Arms",
-                "image_url": "https://wger.de/media/exercise-images/74/Bicep-curls-1.png",
+                "image_url": "http://www.foreverfitness24.com/wp-content/uploads/2014/08/gym.jpg",
                 "buttons": [{
                     "type": "web_url",
                     "url": "https://wger.de/en/exercise/74/view/biceps-curls-with-barbell",
