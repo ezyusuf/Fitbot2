@@ -67,6 +67,7 @@ app.post('/webhook/', function (req, res) {
             text = event.message.text
             if (lastText === 'promptQuery') {
                 showGymCards(text);
+                continue;
             }
             if (text === 'Day' || text === 'Afternoon' || text === 'Night' || text === 'Hulktime' ) {
                 sendTextMessage(sender, "Below is your customized plan for the first day. Just Type 'Hulktime' to see it again: ")
@@ -78,6 +79,7 @@ app.post('/webhook/', function (req, res) {
             if ((text.toLowerCase() === 'yes' || text.toLowerCase() === 'no') && lastText === 'time') {
                 sendTextMessage(sender, "Enter a query");
                 lastText = 'promptQuery'
+                continue;
             }
         }
         if (event.postback) {
