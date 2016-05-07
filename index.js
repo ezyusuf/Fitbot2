@@ -69,6 +69,17 @@ app.post('/webhook/', function (req, res) {
             text = event.message.text
             if (lastText === 'promptQuery') {
                 showGymCards(text);
+                lastText = 'queryResults';
+                continue;
+            }
+            if (lastText === 'homeQuery') {
+                showHomeCards(text);
+                lastText = 'homeResults';
+                continue;
+            }
+            if (lastText === 'queryResults') {
+                sendTextMessage(sender, "Would you like to set your home location? (Yes/No)")
+                lastText = 'setHomePrompt';
                 continue;
             }
             if (text === 'Day' || text === 'Afternoon' || text === 'Night' || text === 'Hulktime' ) {
@@ -81,6 +92,11 @@ app.post('/webhook/', function (req, res) {
             if (text.toLowerCase() === 'yes' && lastText === 'time') {
                 sendTextMessage(sender, "Enter a query");
                 lastText = 'promptQuery'
+                continue;
+            }
+            if (text.toLowerCase() === 'yes' && lastText === 'setHomePrompt') {
+                sendTextMessage(sender, "Enter a query");
+                lastText = 'homeQuery'
                 continue;
             }
         }
@@ -155,6 +171,54 @@ function showGymCards(query) {
                     "type": "postback",
                     "title": "Postback",
                     "payload": "Payload for first element in a generic bubble",
+                }],
+            }
+            elementArray.push(element);
+        }
+        messageData = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": elementArray,
+                }
+            }
+        }
+        request({
+            url: 'https://graph.facebook.com/v2.6/me/messages',
+            qs: {access_token:token},
+            method: 'POST',
+            json: {
+                recipient: {id:sender},
+                message: messageData,
+            }
+        }, function(error, response, body) {
+            if (error) {
+                console.log('Error sending messages: ', error)
+            } else if (response.body.error) {
+                console.log('Error: ', response.body.error)
+            }
+        })
+
+    });
+}
+
+function showHomeCards(query) {
+    queryPlaces(query, function(error, response, body) {
+
+        var results = JSON.parse(body).results;
+        var elementArray = [];
+        for (var i = 0; i < Math.min(results.length, numGymCards); i++) {
+            var result = results[i];
+            console.log(result.formatted_address);
+            var element = {
+                "title": result.formatted_address,
+                "subtitle": "Home Locations",
+                "image_url": "https://www.moneysmart.gov.au/media/399935/buying-a-home.png",
+                "buttons": [{
+                    "type": "web_url",
+                    "title": "Set as Home",
+                    "payload": result.id,
                 }],
             }
             elementArray.push(element);
