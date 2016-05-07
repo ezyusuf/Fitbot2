@@ -216,7 +216,7 @@ function showHomeCards(query) {
                 "subtitle": "Home Locations",
                 "image_url": "https://www.moneysmart.gov.au/media/399935/buying-a-home.png",
                 "buttons": [{
-                    "type": "web_url",
+                    "type": "postback",
                     "title": "Set as Home",
                     "payload": result.id,
                 }],
